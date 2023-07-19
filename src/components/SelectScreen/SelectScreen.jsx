@@ -75,7 +75,7 @@ export default function SelectScreen() {
             rotation-y={Math.PI / 8}
             active={active}
             name="cargo"
-            ship={<Cargo scale={0.4} rotation-y={Math.PI / 8} />}
+            ship={<Cargo scale={0.8} />}
             hovered={hovered}
           />
           {active !== "cargo" && (
@@ -97,7 +97,7 @@ export default function SelectScreen() {
             texture="textures/rogue-world.jpg"
             name="rogue"
             active={active}
-            ship={<Rogue scale={0.2} />}
+            ship={<Rogue scale={0.4} />}
             hovered={hovered}
           />
           {active !== "rogue" && <Rogue scale={0.2} position-z={2} />}
@@ -115,7 +115,7 @@ export default function SelectScreen() {
             rotation-y={-(Math.PI / 8)}
             name="time"
             active={active}
-            ship={<Time scale={0.2} rotation-y={-(Math.PI / 8)} />}
+            ship={<Time scale={0.4} />}
             hovered={hovered}
           />
           {active !== "time" && (

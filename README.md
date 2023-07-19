@@ -2,7 +2,7 @@
 
 A learning project on [Three.js](https://threejs.org/), [React Three Fiber](https://docs.pmnd.rs/react-three-fiber/getting-started/introduction), [React Three Drei](https://github.com/pmndrs/drei) and similar technologies.
 
-[Vercel deploy](https://fly-you-fools-gads8cd7o-agarzon48.vercel.app/)
+[DEMO (vercel)](https://fly-you-fools-gads8cd7o-agarzon48.vercel.app/)
 
 ## How to run
 
