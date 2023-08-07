@@ -6,16 +6,18 @@ Command: npx gltfjsx@6.2.9 public/models/time.gltf -o src/components/Ships/Time.
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
-export default function Time({ active, onSelect, name, ...props }) {
+const Time = React.forwardRef(({ active, onSelect, name, ...props }, ref) => {
   const { nodes, materials } = useGLTF("/models/time.gltf");
   return (
-    <group {...props} dispose={null} onClick={onSelect}>
+    <group {...props} dispose={null} onClick={onSelect} ref={ref}>
       <mesh
         geometry={nodes.Spaceship_BarbaraTheBee.geometry}
         material={materials.Atlas}
       />
     </group>
   );
-}
+});
 
 useGLTF.preload("/models/time.gltf");
+
+export default Time;

@@ -8,6 +8,7 @@ import {
 } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
+import gsap from "gsap";
 
 import { Cargo, Rogue, Time } from "../Ships";
 import Card from "./components/Card";
@@ -17,6 +18,9 @@ export default function SelectScreen() {
   const [hovered, setHovered] = useState(null);
   useCursor(hovered);
   const controlsRef = useRef();
+  const cargoRef = useRef();
+  const rogueRef = useRef();
+  const timeRef = useRef();
   const scene = useThree((state) => state.scene);
 
   useEffect(() => {
@@ -39,6 +43,99 @@ export default function SelectScreen() {
   }, [active]);
 
   const toggleActive = (name) => setActive(active === name ? null : name);
+
+  useEffect(() => {
+    if (active === "cargo") {
+      gsap.to(cargoRef.current.position, {
+        duration: 5,
+        repeat: -1,
+        yoyo: true,
+        y: 0.2,
+      });
+      gsap.to(cargoRef.current.rotation, {
+        duration: 200,
+        repeat: -1,
+        yoyo: true,
+        y: Math.PI * 20,
+      });
+    } else {
+      gsap.to(cargoRef.current.position, {
+        duration: 5,
+        repeat: -1,
+        yoyo: true,
+        y: 0.2,
+      });
+    }
+    console.log(hovered);
+
+    if (active === "rogue") {
+      gsap.to(rogueRef.current.position, {
+        duration: 5,
+        repeat: -1,
+        yoyo: true,
+        y: 0.2,
+      });
+      gsap.to(rogueRef.current.rotation, {
+        duration: 200,
+        repeat: -1,
+        yoyo: true,
+        y: Math.PI * 20,
+      });
+    } else {
+      gsap.to(rogueRef.current.position, {
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        y: 0.2,
+      });
+      gsap.to(rogueRef.current.rotation, {
+        duration: 5,
+        repeatDelay: 2,
+        repeat: -1,
+        yoyo: true,
+        z: Math.PI * 2,
+      });
+      gsap.from(rogueRef.current.position, {
+        duration: 5,
+        // repeatDelay: 2,
+        repeat: -1,
+        yoyo: true,
+        x: -Math.sin(Math.PI * 0.2),
+        y: -Math.cos(Math.PI * 0.2),
+      });
+      gsap.to(rogueRef.current.position, {
+        duration: 5,
+        // repeatDelay: 2,
+        repeat: -1,
+        yoyo: true,
+        x: Math.sin(Math.PI * 0.2),
+        y: Math.cos(Math.PI * 0.2),
+      });
+    }
+
+    if (active === "time") {
+      gsap.to(timeRef.current.position, {
+        duration: 5,
+        repeat: -1,
+        yoyo: true,
+        y: 0.2,
+      });
+      gsap.to(timeRef.current.rotation, {
+        duration: 200,
+        repeat: -1,
+        yoyo: true,
+        y: Math.PI * 20,
+      });
+    } else {
+      gsap.to(timeRef.current.rotation, {
+        duration: 200,
+        // repeatDelay: 2,
+        repeat: -1,
+        yoyo: true,
+        y: Math.PI * 20,
+      });
+    }
+  }, [active]);
 
   return (
     <>
@@ -75,7 +172,7 @@ export default function SelectScreen() {
             rotation-y={Math.PI / 8}
             active={active}
             name="cargo"
-            ship={<Cargo scale={0.8} />}
+            ship={<Cargo scale={0.8} ref={cargoRef} />}
             hovered={hovered}
           />
           {active !== "cargo" && (
@@ -84,6 +181,7 @@ export default function SelectScreen() {
               position-x={-3.37}
               position-z={2}
               rotation-y={Math.PI / 8}
+              ref={cargoRef}
             />
           )}
         </group>
@@ -97,10 +195,12 @@ export default function SelectScreen() {
             texture="textures/rogue-world.jpg"
             name="rogue"
             active={active}
-            ship={<Rogue scale={0.4} />}
+            ship={<Rogue scale={0.4} ref={rogueRef} />}
             hovered={hovered}
           />
-          {active !== "rogue" && <Rogue scale={0.2} position-z={2} />}
+          {active !== "rogue" && (
+            <Rogue scale={0.2} position-z={2} ref={rogueRef} />
+          )}
         </group>
         <group
           active={active}
@@ -115,7 +215,7 @@ export default function SelectScreen() {
             rotation-y={-(Math.PI / 8)}
             name="time"
             active={active}
-            ship={<Time scale={0.4} />}
+            ship={<Time scale={0.4} ref={timeRef} />}
             hovered={hovered}
           />
           {active !== "time" && (
@@ -124,6 +224,7 @@ export default function SelectScreen() {
               position-x={3.37}
               position-z={2}
               rotation-y={-(Math.PI / 8)}
+              ref={timeRef}
             />
           )}
         </group>

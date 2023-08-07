@@ -6,16 +6,18 @@ Command: npx gltfjsx@6.2.9 public/models/cargo.gltf -o src/components/Ships.jsx 
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
-export default function Cargo({ active, onSelect, name, ...props }) {
+const Cargo = React.forwardRef(({ active, onSelect, name, ...props }, ref) => {
   const { nodes, materials } = useGLTF("/models/cargo.gltf");
   return (
-    <group {...props} dispose={null} onClick={onSelect}>
+    <group {...props} dispose={null} onClick={onSelect} ref={ref}>
       <mesh
         geometry={nodes.Spaceship_FinnTheFrog.geometry}
         material={materials.Atlas}
       />
     </group>
   );
-}
+});
 
 useGLTF.preload("/models/cargo.gltf");
+
+export default Cargo;

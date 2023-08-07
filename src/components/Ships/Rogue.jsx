@@ -6,16 +6,18 @@ Command: npx gltfjsx@6.2.9 public/models/rogue.gltf -o src/components/Ships/Rogu
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
-export default function Rogue({ active, onSelect, name, ...props }) {
+const Rogue = React.forwardRef(({ active, onSelect, name, ...props }, ref) => {
   const { nodes, materials } = useGLTF("/models/rogue.gltf");
   return (
-    <group {...props} dispose={null} onClick={onSelect}>
+    <group {...props} dispose={null} onClick={onSelect} ref={ref}>
       <mesh
         geometry={nodes.Spaceship_RaeTheRedPanda.geometry}
         material={materials.Atlas}
       />
     </group>
   );
-}
+});
 
 useGLTF.preload("/models/rogue.gltf");
+
+export default Rogue;
